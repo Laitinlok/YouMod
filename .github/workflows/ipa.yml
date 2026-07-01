@@ -2,6 +2,16 @@ name: Build IPA with tweaks
 on:
   workflow_dispatch:
     inputs:
+      repo:
+        description: 'Repository to build from'
+        required: true
+        default: 'Tonwalter888/YouMod'
+
+      branch:
+        description: 'Branch to build from'
+        required: true
+        default: 'main'
+
       ipa_url:
         description: "URL to the decrypted IPA file"
         default: ""
@@ -247,6 +257,8 @@ jobs:
       - name: Checkout YouMod
         uses: actions/checkout@v7
         with:
+          repository: ${{ inputs.repo }}
+          ref: ${{ inputs.branch }}
           path: YouMod
 
       - name: Clone Open in YouTube (Safari Extension)
